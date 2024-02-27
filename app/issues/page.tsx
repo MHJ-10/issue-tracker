@@ -1,9 +1,13 @@
+import Link from 'next/link';
+
 const IssuesPage = () => {
   return (
     <div>
-      Issues Page
+      <Link className='btn-blue' href='/issues/new'>
+        New Issue Page
+      </Link>
     </div>
-  )
-}
+  );
+};
 
-export default IssuesPage
+export default IssuesPage;
