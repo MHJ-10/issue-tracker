@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
+@layer components {
+  .btn-blue {
+    @apply rounded-md bg-blue-600  px-3 py-3 text-white shadow-sm shadow-gray-500 transition-colors hover:bg-blue-700;
+  }
 }
