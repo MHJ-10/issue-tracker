@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { FaBug } from 'react-icons/fa6';
 
 interface ILink {
   label: string;
@@ -14,18 +15,20 @@ const Navbar = () => {
   console.log(pathname);
 
   const links: ILink[] = [
-    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Dashboard', href: '/' },
     { label: 'Issues', href: '/issues' },
   ];
 
   return (
     <nav className='flex items-center space-x-10 bg-slate-200 px-3 py-5'>
-      <Link href='/'>Logo</Link>
+      <Link href='/'>
+        <FaBug size={25} />
+      </Link>
       <ul className='flex gap-5'>
         {links.map((link) => (
           <li>
             <Link
-              className={`${link.href === pathname && 'text-zinc-800 underline underline-offset-2'} text-zinc-500`}
+              className={`${link.href === pathname && 'text-zinc-950 underline underline-offset-2'} text-zinc-600`}
               href={link.href}
             >
               {link.label}
