@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <nav className='flex items-center space-x-10 bg-slate-200 px-3 py-5'>
       <Link href='/'>
-        <FaBug size={25} />
+        <FaBug size={26} />
       </Link>
       <ul className='flex gap-5'>
         {links.map((link) => (
