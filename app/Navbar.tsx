@@ -12,8 +12,6 @@ interface ILink {
 const Navbar = () => {
   const pathname = usePathname();
 
-  console.log(pathname);
-
   const links: ILink[] = [
     { label: 'Dashboard', href: '/' },
     { label: 'Issues', href: '/issues' },
@@ -26,7 +24,7 @@ const Navbar = () => {
       </Link>
       <ul className='flex gap-5'>
         {links.map((link) => (
-          <li>
+          <li key={link.href}>
             <Link
               className={`${link.href === pathname && 'text-zinc-950 underline underline-offset-2'} text-zinc-600`}
               href={link.href}
