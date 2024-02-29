@@ -1,7 +1,9 @@
-import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Slide, ToastContainer } from 'react-toastify';
+import 'react-toastify/ReactToastify.css';
 import Navbar from './Navbar';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,6 +20,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.className} m-0 p-0`}>
+        <ToastContainer
+          theme='light'
+          closeOnClick
+          draggable
+          transition={Slide}
+          autoClose={3000}
+          limit={2}
+        />
         <Navbar />
         <main className='p-5'>{children}</main>
       </body>
