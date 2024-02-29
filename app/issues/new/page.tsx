@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { issueSchema } from '@/app/api/issues/route';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type Inputs = {
   title: string;
@@ -13,11 +15,15 @@ type Inputs = {
 };
 
 const NewIssuePage = () => {
-  const { register, handleSubmit } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({ resolver: zodResolver(issueSchema) });
   const router = useRouter();
 
   const onSumbit = async (data: Inputs) => {
-    const response = await toast.promise(httpService.post('/issuefs', data), {
+    const response = await toast.promise(httpService.post('/issues', data), {
       pending: 'sending issue...',
       success: {
         render({ data }) {
@@ -48,28 +54,30 @@ const NewIssuePage = () => {
         onSubmit={handleSubmit(onSumbit)}
       >
         <p className='text-2xl font-bold '>Add Issue Form</p>
-        <div className='flex w-3/4 justify-between'>
+        <div className='flex w-3/4 flex-row justify-between'>
           <label htmlFor='title'>Title:</label>
-          <input
-            id='title'
-            className='w-2/3 rounded-md border-2  border-blue-400 px-1 outline-none transition-colors duration-500  focus:border-blue-600'
-            type='text'
-            {...register('title', {
-              required: true,
-              minLength: 1,
-              maxLength: 255,
-            })}
-          />
+          <div className='flex w-3/4 flex-col gap-2'>
+            <input
+              id='title'
+              className={`w-3/3 rounded-md border-2 ${errors.title ? 'border-red-500' : 'border-blue-400'} border-blue-400 px-1 outline-none transition-colors duration-500  focus:border-blue-600`}
+              type='text'
+              {...register('title')}
+            />
+            <p className='text-red-500'>{errors.title?.message}</p>
+          </div>
         </div>
 
         <div className='flex w-3/4 justify-between'>
           <label htmlFor='description'>Description:</label>
-          <textarea
-            id='description'
-            className='w-2/3 rounded-md border-2  border-blue-400 px-1 outline-none transition-colors duration-500  focus:border-blue-600'
-            rows={3}
-            {...register('description', { required: true, minLength: 1 })}
-          />
+          <div className='flex w-3/4 flex-col gap-2'>
+            <textarea
+              id='description'
+              className={`w-3/3 rounded-md border-2 ${errors.description ? 'border-red-500' : 'border-blue-400'} border-blue-400 px-1 outline-none transition-colors duration-500  focus:border-blue-600`}
+              rows={3}
+              {...register('description')}
+            />
+            <p className='text-red-500'>{errors.description?.message}</p>
+          </div>
         </div>
 
         <button className='btn-blue'>Create</button>
