@@ -3,8 +3,11 @@ import { z } from 'zod';
 import prisma from '@/prisma/client';
 
 export const issueSchema = z.object({
-  title: z.string().min(1).max(255),
-  description: z.string().min(1),
+  title: z
+    .string()
+    .min(1, { message: 'Title is required' })
+    .max(255, { message: 'Title must be at most 255 characters' }),
+  description: z.string().min(1, { message: 'Description is required.' }),
 });
 
 export async function POST(req: NextRequest) {
