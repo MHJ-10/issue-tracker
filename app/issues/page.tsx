@@ -1,10 +1,9 @@
 import prisma from '@/prisma/client';
 import Link from 'next/link';
+import IssueStatusBadge from '../components/IssueStatusBadge';
 
 const IssuesPage = async () => {
   const issues = await prisma.issue.findMany();
-
-  console.log(issues);
 
   return (
     <div>
@@ -26,7 +25,9 @@ const IssuesPage = async () => {
             <tr className='border-b dark:border-neutral-500'>
               <td className='whitespace-nowrap px-6 py-4'>{i + 1}</td>
               <td className='whitespace-nowrap px-6 py-4'>{issue.title}</td>
-              <td className='whitespace-nowrap px-6 py-4'>{issue.status}</td>
+              <td className='whitespace-nowrap px-6 py-4'>
+                <IssueStatusBadge status={issue.status} />
+              </td>
               <td className='whitespace-nowrap px-6 py-4'>
                 {issue.createdAt.toDateString()}
               </td>
