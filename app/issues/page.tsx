@@ -24,7 +24,7 @@ const IssuesPage = async () => {
           {issues.map((issue, i) => (
             <tr className='border-b dark:border-neutral-500'>
               <td className='whitespace-nowrap px-6 py-4'>{i + 1}</td>
-              <td className='whitespace-nowrap px-6 py-4 underline underline-offset-2'>
+              <td className='whitespace-nowrap px-6 py-4 text-blue-900 hover:underline'>
                 <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
               </td>
               <td className='whitespace-nowrap px-6 py-4'>
