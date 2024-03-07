@@ -27,7 +27,7 @@ const IssueDetails = async ({ params }: Props) => {
         <p>{issue?.createdAt.toDateString()}</p>
       </div>
 
-      <p className='border-2 p-3 rounded-md border-slate-200'>{issue?.description}</p>
+      <p className='border-2 p-3 rounded-md border-slate-200 my-4'>{issue?.description}</p>
     </div>
   );
 };
