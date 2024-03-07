@@ -1,5 +1,7 @@
 import React from 'react';
 import prisma from '@/prisma/client';
+import { notFound } from 'next/navigation';
+import IssueStatusBadge from '@/app/components/IssueStatusBadge';
 
 interface Props {
   params: {
@@ -14,13 +16,18 @@ const IssueDetails = async ({ params }: Props) => {
     },
   });
 
+  if (!issue) notFound();
+
   return (
     <div>
-      <p>{issue?.title}</p>
-      <p>{issue?.description}</p>
-      <p>{issue?.status}</p>
-      <p>{issue?.createdAt.toDateString()}</p>
-      <p>{issue?.updatedAt.toDateString()}</p>
+      <p className='text-3xl'>{issue?.title}</p>
+
+      <div className='my-3 flex gap-3'>
+        <IssueStatusBadge status={issue.status} />
+        <p>{issue?.createdAt.toDateString()}</p>
+      </div>
+
+      <p className='border-2 p-3 rounded-md border-slate-200'>{issue?.description}</p>
     </div>
   );
 };
