@@ -1,7 +1,6 @@
-import React from 'react';
+import { IssueStatusBadge } from '@/app/components/index';
 import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
-import IssueStatusBadge from '@/app/components/IssueStatusBadge';
 
 interface Props {
   params: {
@@ -27,7 +26,9 @@ const IssueDetails = async ({ params }: Props) => {
         <p>{issue?.createdAt.toDateString()}</p>
       </div>
 
-      <p className='border-2 p-3 rounded-md border-slate-200 my-4'>{issue?.description}</p>
+      <p className='my-4 rounded-md border-2 border-slate-200 p-3'>
+        {issue?.description}
+      </p>
     </div>
   );
 };

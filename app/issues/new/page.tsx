@@ -8,22 +8,19 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { issueSchema } from '@/app/api/issues/route';
 import { zodResolver } from '@hookform/resolvers/zod';
-import delay from 'delay';
 
 type Inputs = {
   title: string;
   description: string;
 };
 
-const NewIssuePage = async () => {
+const NewIssuePage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(issueSchema) });
   const router = useRouter();
-
-  await delay(2000);
 
   const onSumbit = async (data: Inputs) => {
     const response = await toast.promise(httpService.post('/issues', data), {
