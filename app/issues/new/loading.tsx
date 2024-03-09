@@ -4,8 +4,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 const IssueFormLoading = () => {
   return (
-    <div className='h-2/3 w-2/3'>
-      <Skeleton />
+    <div className='flex flex-col items-center justify-center'>
+      <Skeleton width='70vw' height='70vh' />
     </div>
   );
 };
