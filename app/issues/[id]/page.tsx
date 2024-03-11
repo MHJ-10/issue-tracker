@@ -1,6 +1,7 @@
-import { IssueStatusBadge } from '@/app/components/index';
 import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
+import EditIssueButton from './EditIssueButton';
+import IssueDetails from './IssueDetails';
 
 interface Props {
   params: {
@@ -8,7 +9,7 @@ interface Props {
   };
 }
 
-const IssueDetails = async ({ params }: Props) => {
+const IssueDetailsPage = async ({ params }: Props) => {
   const issue = await prisma.issue.findUnique({
     where: {
       id: +params.id,
@@ -18,19 +19,15 @@ const IssueDetails = async ({ params }: Props) => {
   if (!issue) notFound();
 
   return (
-    <div>
-      <p className='text-3xl'>{issue?.title}</p>
-
-      <div className='my-3 flex gap-3'>
-        <IssueStatusBadge status={issue.status} />
-        <p>{issue?.createdAt.toDateString()}</p>
+    <div className='my-2 grid grid-cols-2 gap-8'>
+      <div>
+        <IssueDetails issue={issue} />
       </div>
-
-      <p className='my-4 rounded-md border-2 border-slate-200 p-3'>
-        {issue?.description}
-      </p>
+      <div>
+        <EditIssueButton issueId={issue.id} />
+      </div>
     </div>
   );
 };
 
-export default IssueDetails;
+export default IssueDetailsPage;
