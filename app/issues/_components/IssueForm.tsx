@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-const IssueForm = async ({ issue }: { issue?: Issue }) => {
+const IssueForm = ({ issue }: { issue?: Issue }) => {
   const {
     register,
     handleSubmit,
@@ -19,18 +19,23 @@ const IssueForm = async ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
 
   const onSumbit = async (data: Issue) => {
-    const response = await toast.promise(httpService.post('/issues', data), {
-      pending: 'sending issue...',
-      success: {
-        render({ data }) {
-          if (data.status === 201) {
-            setTimeout(() => router.push('/issues'), 3000);
-            return 'send issue successfully';
-          }
+    const response = await toast.promise(
+      issue
+        ? httpService.patch(`/issues/${issue.id}`, data)
+        : httpService.post('/issues', data),
+      {
+        pending: `${issue ? 'update' : 'send'} issue...`,
+        success: {
+          render({ data }) {
+            if (data.status === 201) {
+              setTimeout(() => router.push('/issues'), 3000);
+              return `${issue ? 'update' : 'send'} issue successfully`;
+            }
+          },
         },
-      },
-      error: 'failed to send issue',
-    });
+        error: `failed to ${issue ? 'update' : 'send'} issue`,
+      }
+    );
 
     console.log(response);
   };
@@ -78,7 +83,9 @@ const IssueForm = async ({ issue }: { issue?: Issue }) => {
           </div>
         </div>
 
-        <button className='btn-blue'>Create</button>
+        <button className='btn-blue'>
+          {issue ? 'Update Issue' : 'Create Issue'}
+        </button>
       </form>
     </div>
   );
