@@ -1,6 +1,6 @@
 'use client';
 
-import { issueSchema } from '@/app/api/issues/route';
+import { issueSchema } from '@/app/validationSchema';
 import bugImage from '@/public/images/colorful-bug.png';
 import { httpService } from '@/services/httpService';
 import { zodResolver } from '@hookform/resolvers/zod';
