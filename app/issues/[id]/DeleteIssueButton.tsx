@@ -33,7 +33,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
   };
   return (
     <button
-      className='flex w-32 items-center justify-center gap-2 rounded-md bg-red-500 px-3 py-2 text-white transition-colors duration-500 hover:bg-red-600'
+      className='issue-btn bg-red-500 text-white hover:bg-red-600'
       onClick={handleDelete}
     >
       <HiTrash />
