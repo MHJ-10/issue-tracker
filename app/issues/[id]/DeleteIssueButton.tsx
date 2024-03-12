@@ -17,7 +17,10 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
         success: {
           render({ data }) {
             if (data.status === 200) {
-              setTimeout(() => router.push('/issues'), 2000);
+              setTimeout(() => {
+                router.push('/issues');
+                router.refresh();
+              }, 2000);
               return 'Issue deleted successfully';
             }
           },

@@ -28,7 +28,10 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         success: {
           render({ data }) {
             if (data.status === 201) {
-              setTimeout(() => router.push('/issues'), 3000);
+              setTimeout(() => {
+                router.push('/issues');
+                router.refresh();
+              }, 3000);
               return `${issue ? 'update' : 'send'} issue successfully`;
             }
           },
