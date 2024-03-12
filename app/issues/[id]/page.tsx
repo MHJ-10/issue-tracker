@@ -20,7 +20,7 @@ const IssueDetailsPage = async ({ params }: Props) => {
   if (!issue) notFound();
 
   return (
-    <div className='my-2 grid grid-cols-2 gap-8'>
+    <div className='my-2 grid grid-rows-2 gap-4 md:grid-cols-2 md:gap-8'>
       <div>
         <IssueDetails issue={issue} />
       </div>
