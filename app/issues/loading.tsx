@@ -6,7 +6,7 @@ const IssuesPageLoading = () => {
       <thead className='border-b font-medium dark:border-neutral-500'>
         <tr>
           {[1, 2, 3, 4].map((number) => (
-            <th className='px-6 py-4'>
+            <th key={number} className='px-6 py-4'>
               <Skeleton />
             </th>
           ))}
@@ -14,7 +14,7 @@ const IssuesPageLoading = () => {
       </thead>
       <tbody>
         {[1, 2, 3, 4, 5, 6].map((number) => (
-          <tr className='border-b dark:border-neutral-500'>
+          <tr key={number} className='border-b dark:border-neutral-500'>
             <td className='whitespace-nowrap px-6 py-4'>
               <Skeleton />
             </td>
