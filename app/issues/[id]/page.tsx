@@ -1,8 +1,9 @@
 import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
-import EditIssueButton from './EditIssueButton';
-import IssueDetails from './IssueDetails';
-import DeleteIssueButton from './DeleteIssueButton';
+import EditIssueButton from '../_components/EditIssueButton';
+import IssueDetails from '../_components/IssueDetails';
+import DeleteIssueButton from '../_components/DeleteIssueButton';
+import Dialog from '@/app/components/Dialog';
 
 interface Props {
   params: {
