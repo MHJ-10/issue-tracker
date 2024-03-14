@@ -29,7 +29,7 @@ export default function RootLayout({
           limit={2}
         />
         <Navbar />
-        <main className='p-2'>{children}</main>
+        <main className='px-2 py-5'>{children}</main>
       </body>
     </html>
   );
