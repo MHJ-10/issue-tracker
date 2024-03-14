@@ -44,53 +44,50 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
   };
 
   return (
-    <div className='mx-auto grid w-2/3 grid-cols-3 rounded-md border-2 border-slate-400'>
-      <div className='col-span-1 flex flex-col items-center justify-center rounded-l-md bg-blue-400'>
-        <Image
-          className='transition-all duration-700 ease-in-out hover:translate-y-2 hover:scale-110'
-          src={bugImage}
-          alt='bug'
-          priority
-        />
+    <form
+      className='col-span-2 mx-auto flex w-full flex-col items-center justify-center gap-5 rounded-md rounded-r-md border border-slate-200 bg-slate-300 py-3 sm:w-2/3 lg:w-3/5'
+      onSubmit={handleSubmit(onSumbit)}
+    >
+      <Image
+        src={bugImage}
+        alt='bug'
+        width={90}
+        height={90}
+        className='size-32 rounded-full border border-slate-400 bg-slate-200 p-1 shadow-md shadow-gray-400 transition-transform duration-500 hover:translate-y-2 hover:scale-110'
+      />
+      <p className='text-2xl font-bold uppercase'>Issue Form</p>
+      <div className='flex w-full justify-between px-2 sm:w-3/4'>
+        <label htmlFor='title'>Title:</label>
+        <div className='flex w-3/4 flex-col gap-2'>
+          <input
+            id='title'
+            className={`w-3/3 rounded-md border-2 ${errors.title ? 'border-red-500' : 'border-blue-400'} border-blue-400 px-1 outline-none transition-colors duration-500  focus:border-blue-600`}
+            defaultValue={issue?.title}
+            type='text'
+            {...register('title')}
+          />
+          <p className='text-red-500'>{errors.title?.message}</p>
+        </div>
       </div>
-      <form
-        className='col-span-2 flex flex-col items-center justify-center gap-10 rounded-r-md bg-blue-600 bg-opacity-20 py-8'
-        onSubmit={handleSubmit(onSumbit)}
-      >
-        <p className='text-2xl font-bold uppercase'>Issue Form</p>
-        <div className='flex w-3/4 flex-row justify-between'>
-          <label htmlFor='title'>Title:</label>
-          <div className='flex w-3/4 flex-col gap-2'>
-            <input
-              id='title'
-              className={`w-3/3 rounded-md border-2 ${errors.title ? 'border-red-500' : 'border-blue-400'} border-blue-400 px-1 outline-none transition-colors duration-500  focus:border-blue-600`}
-              defaultValue={issue?.title}
-              type='text'
-              {...register('title')}
-            />
-            <p className='text-red-500'>{errors.title?.message}</p>
-          </div>
-        </div>
 
-        <div className='flex w-3/4 justify-between'>
-          <label htmlFor='description'>Description:</label>
-          <div className='flex w-3/4 flex-col gap-2'>
-            <textarea
-              id='description'
-              className={`w-3/3 rounded-md border-2 ${errors.description ? 'border-red-500' : 'border-blue-400'} border-blue-400 px-1 outline-none transition-colors duration-500  focus:border-blue-600`}
-              defaultValue={issue?.description}
-              rows={3}
-              {...register('description')}
-            />
-            <p className='text-red-500'>{errors.description?.message}</p>
-          </div>
+      <div className='flex w-full justify-between px-2 sm:w-3/4'>
+        <label htmlFor='description'>Description:</label>
+        <div className='flex w-3/4 flex-col gap-2'>
+          <textarea
+            id='description'
+            className={`w-3/3 rounded-md border-2 ${errors.description ? 'border-red-500' : 'border-blue-400'} border-blue-400 px-1 outline-none transition-colors duration-500  focus:border-blue-600`}
+            defaultValue={issue?.description}
+            rows={3}
+            {...register('description')}
+          />
+          <p className='text-red-500'>{errors.description?.message}</p>
         </div>
+      </div>
 
-        <button className='btn-blue'>
-          {issue ? 'Update Issue' : 'Create Issue'}
-        </button>
-      </form>
-    </div>
+      <button className='btn-blue'>
+        {issue ? 'Update Issue' : 'Create Issue'}
+      </button>
+    </form>
   );
 };
 
