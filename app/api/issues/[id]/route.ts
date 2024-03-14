@@ -46,14 +46,11 @@ export async function DELETE(
   if (!issue)
     return NextResponse.json({ message: 'issue not found' }, { status: 404 });
 
-  const deletedIssue = await prisma.issue.delete({
+  await prisma.issue.delete({
     where: {
-      id: +params.id,
+      id: issue.id,
     },
   });
 
-  return NextResponse.json(
-    { deletedData: deletedIssue, message: 'the issue deleted' },
-    { status: 200 }
-  );
+  return NextResponse.json({}, { status: 200 });
 }
