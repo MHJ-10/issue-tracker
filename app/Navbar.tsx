@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaBug } from 'react-icons/fa6';
+import { useSession } from 'next-auth/react';
 
 interface ILink {
   label: string;
@@ -11,10 +12,16 @@ interface ILink {
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { status } = useSession();
+  const isAuth = status === 'authenticated';
 
   const links: ILink[] = [
     { label: 'Dashboard', href: '/' },
     { label: 'Issues', href: '/issues' },
+    {
+      label: `${isAuth ? 'Logout' : 'Login'}`,
+      href: `/api/auth/${isAuth ? 'signout' : 'signin'}`,
+    },
   ];
 
   return (

@@ -4,6 +4,7 @@ import { Slide, ToastContainer } from 'react-toastify';
 import 'react-toastify/ReactToastify.css';
 import Navbar from './Navbar';
 import './globals.css';
+import AuthProvider from './auth/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,16 +21,18 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.className} m-0 p-0`}>
-        <ToastContainer
-          theme='light'
-          closeOnClick
-          draggable
-          transition={Slide}
-          autoClose={3000}
-          limit={2}
-        />
-        <Navbar />
-        <main className='px-2 py-5'>{children}</main>
+        <AuthProvider>
+          <ToastContainer
+            theme='light'
+            closeOnClick
+            draggable
+            transition={Slide}
+            autoClose={3000}
+            limit={2}
+          />
+          <Navbar />
+          <main className='px-2 py-5'>{children}</main>
+        </AuthProvider>
       </body>
     </html>
   );
