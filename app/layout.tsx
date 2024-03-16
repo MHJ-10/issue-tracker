@@ -31,7 +31,7 @@ export default function RootLayout({
             limit={2}
           />
           <Navbar />
-          <main className='px-2 py-5'>{children}</main>
+          <main className='container mx-auto px-2 py-5'>{children}</main>
         </AuthProvider>
       </body>
     </html>
