@@ -1,12 +1,13 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaBug } from 'react-icons/fa6';
-import { useSession } from 'next-auth/react';
-import Dropdown from './components/Dropdown';
 import { useState } from 'react';
-import Image from 'next/image';
+import { FaBug } from 'react-icons/fa6';
+import { Skeleton } from './components';
+import Dropdown from './components/Dropdown';
 
 interface ILink {
   label: string;
@@ -57,7 +58,15 @@ const AuthDropdown = () => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const { data, status } = useSession();
 
-  if (status === 'loading') return null;
+  if (status === 'loading')
+    return (
+      <Skeleton
+        circle
+        baseColor='rgb(82 82 91 /1);'
+        width='1.75rem'
+        height='1.75rem'
+      />
+    );
 
   if (status === 'unauthenticated')
     return (
