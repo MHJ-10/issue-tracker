@@ -7,7 +7,7 @@ const IssueDetails = ({ issue }: { issue: Issue }) => {
       <p className='text-3xl'>{issue?.title}</p>
       <div className='flex gap-5'>
         <IssueStatusBadge status={issue.status} />
-        <p>{issue?.createdAt.toDateString()}</p>
+        <p>{issue?.createdAt.toLocaleString("en-GB")}</p>
       </div>
 
       <p className='my-4 rounded-md border-2 border-slate-200 p-3'>
