@@ -1,24 +1,37 @@
 'use client';
 
+import { Skeleton } from '@/app/components';
 import { httpService } from '@/services/httpService';
 import { User } from '@prisma/client';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 
 const AssigneeSelect = () => {
-  const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User>();
   const [showSelect, setShowSelect] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const { data } = await httpService.get<User[]>('/users');
-      setUsers(data);
-    };
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useQuery<User[]>({
+    queryKey: ['users'],
+    queryFn: async () =>
+      await httpService.get<User[]>('/users').then((res) => res.data),
+    staleTime: 60 * 1000,
+    retry: 3,
+  });
 
-    fetchUsers();
-  }, []);
+  if (isLoading)
+    return (
+      <div className='w-full sm:w-1/2'>
+        <Skeleton height={55} />
+      </div>
+    );
+
+  if (error) return null;
 
   return (
     <div className='w-full sm:w-1/2'>
@@ -42,7 +55,7 @@ const AssigneeSelect = () => {
 
         {showSelect && (
           <ul className='absolute z-10 mt-1 max-h-56 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-            {users.map((user) => (
+            {users?.map((user) => (
               <li className='relative  select-none py-2  text-gray-900'>
                 <div
                   className='flex items-center justify-start gap-2 ps-2'
