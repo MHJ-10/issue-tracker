@@ -5,6 +5,7 @@ import 'react-toastify/ReactToastify.css';
 import Navbar from './Navbar';
 import './globals.css';
 import AuthProvider from './auth/AuthProvider';
+import QueryClientProvider from './QueryClientProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,18 +22,20 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.className} m-0 p-0`}>
-        <AuthProvider>
-          <ToastContainer
-            theme='light'
-            closeOnClick
-            draggable
-            transition={Slide}
-            autoClose={3000}
-            limit={2}
-          />
-          <Navbar />
-          <main className='container mx-auto  py-5'>{children}</main>
-        </AuthProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <ToastContainer
+              theme='light'
+              closeOnClick
+              draggable
+              transition={Slide}
+              autoClose={3000}
+              limit={2}
+            />
+            <Navbar />
+            <main className='container mx-auto  py-5'>{children}</main>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
