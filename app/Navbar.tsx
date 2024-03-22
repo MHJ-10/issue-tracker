@@ -70,7 +70,7 @@ const AuthDropdown = () => {
 
   if (status === 'unauthenticated')
     return (
-      <Link className='text-zinc-600' href='/api/auth/sigin'>
+      <Link className='text-zinc-600' href='/api/auth/signin'>
         Login
       </Link>
     );
