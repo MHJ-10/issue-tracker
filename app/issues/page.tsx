@@ -1,17 +1,39 @@
 import { IssueStatusBadge } from '@/app/components/index';
 import prisma from '@/prisma/client';
+import { Status } from '@prisma/client';
 import Link from 'next/link';
+import IssueStatusFilter from './_components/IssueStatusFilter';
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
+interface Props {
+  searchParams: {
+    status: Status;
+  };
+}
+
+const IssuesPage = async ({ searchParams }: Props) => {
+  const status = Object.values(Status).includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+
+  const issues = await prisma.issue.findMany({
+    where: {
+      status,
+    },
+  });
 
   return (
     <div>
-      <Link className='btn-blue' href='/issues/new'>
-        New Issue Page
-      </Link>
+      <div className='flex justify-between px-2'>
+        <IssueStatusFilter />
+        <Link
+          className='rounded-md bg-blue-600  px-3 py-2 text-center text-white shadow-sm shadow-gray-500 transition-colors hover:bg-blue-700'
+          href='/issues/new'
+        >
+          New Issue
+        </Link>
+      </div>
 
-      <table className='my-10 w-full rounded-md border  text-left'>
+      <table className='my-5 w-full rounded-md border  text-left'>
         <thead className='border-b font-medium dark:border-neutral-500'>
           <tr>
             <th className='px-6 py-4'>#</th>
