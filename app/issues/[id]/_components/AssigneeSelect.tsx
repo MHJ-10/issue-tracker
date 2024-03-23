@@ -57,7 +57,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         onClick={() => setShowSelect((prev) => !prev)}
       >
         {users?.map((user) => (
-          <li className='relative select-none py-2 text-gray-900'>
+          <li className='relative select-none py-2 text-gray-900 transition duration-200 ease-in-out hover:bg-slate-200'>
             <div
               className='flex items-center justify-start gap-2 ps-2'
               onClick={() => assignIssue(user)}
