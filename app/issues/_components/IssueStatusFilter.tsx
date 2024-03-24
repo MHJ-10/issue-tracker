@@ -23,9 +23,16 @@ const IssueStatusFilter = () => {
   const searchParams = useSearchParams();
 
   const addQuery = (status: IssueStatusFilter) => {
-    const query = status.status ? `?status=${status.status}` : '';
+    const orderBy = searchParams.get('orderBy');
+    const params = new URLSearchParams();
+
+    if (status.status) params.append('status', status.status!);
+    if (orderBy) params.append('orderBy', orderBy);
+
+    const query = params.size ? `?${params.toString()}` : '';
     router.push(`/issues/${query}`);
     setShowSelect(false);
+    console.log(params.toString());
   };
 
   return (
@@ -33,14 +40,15 @@ const IssueStatusFilter = () => {
       <label className='mt-1 block text-sm font-medium leading-6 text-gray-900'>
         Filter by status :
       </label>
-      <div className='w-1/2'>
+      <div className='w-1/4'>
         <Select
-          placeholder={searchParams.get('status') ?? 'Select a status'}
+          placeholder={searchParams.get('status') ?? 'All'}
           showSelect={showSelect}
           onClick={() => setShowSelect((prev) => !prev)}
         >
           {statuses.map((status) => (
             <li
+              key={status.label}
               className='relative  select-none py-2 text-gray-900 transition duration-200 ease-in-out hover:bg-slate-200'
               onClick={() => addQuery(status)}
             >
