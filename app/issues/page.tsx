@@ -1,24 +1,40 @@
 import { IssueStatusBadge } from '@/app/components/index';
 import prisma from '@/prisma/client';
-import { Status } from '@prisma/client';
+import { Issue, Status } from '@prisma/client';
 import Link from 'next/link';
 import IssueStatusFilter from './_components/IssueStatusFilter';
+import { FaArrowUpLong } from 'react-icons/fa6';
 
 interface Props {
   searchParams: {
     status: Status;
+    orderBy: keyof Issue;
   };
 }
+
+const columns: { label: string; value: keyof Issue }[] = [
+  { label: 'Issue', value: 'title' },
+  { label: 'Status', value: 'status' },
+  { label: 'Created At', value: 'createdAt' },
+];
 
 const IssuesPage = async ({ searchParams }: Props) => {
   const status = Object.values(Status).includes(searchParams.status)
     ? searchParams.status
+    : undefined;
+  const orderBy = columns
+    .map((column) => column.value)
+    .includes(searchParams.orderBy)
+    ? {
+        [searchParams.orderBy]: 'asc',
+      }
     : undefined;
 
   const issues = await prisma.issue.findMany({
     where: {
       status,
     },
+    orderBy,
   });
 
   return (
@@ -37,9 +53,20 @@ const IssuesPage = async ({ searchParams }: Props) => {
         <thead className='border-b font-medium dark:border-neutral-500'>
           <tr>
             <th className='px-6 py-4'>#</th>
-            <th className='px-6 py-4'>Title</th>
-            <th className='px-6 py-4'>Status</th>
-            <th className='px-6 py-4'>Created At</th>
+            {columns.map((column) => (
+              <th key={column.value} className='px-6 py-4'>
+                <Link
+                  href={{
+                    query: { ...searchParams, orderBy: column.value },
+                  }}
+                >
+                  {column.label}
+                  {column.value === searchParams.orderBy && (
+                    <FaArrowUpLong className='mb-1 inline' />
+                  )}
+                </Link>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
