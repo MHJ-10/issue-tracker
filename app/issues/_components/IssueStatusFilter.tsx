@@ -2,7 +2,7 @@
 
 import { Select } from '@/app/components';
 import { Status } from '@prisma/client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 
 interface IssueStatusFilter {
@@ -20,6 +20,7 @@ const statuses: IssueStatusFilter[] = [
 const IssueStatusFilter = () => {
   const [showSelect, setShowSelect] = useState<boolean>(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const addQuery = (status: IssueStatusFilter) => {
     const query = status.status ? `?status=${status.status}` : '';
@@ -34,7 +35,7 @@ const IssueStatusFilter = () => {
       </label>
       <div className='w-1/2'>
         <Select
-          placeholder='select a status'
+          placeholder={searchParams.get('status') ?? 'Select a status'}
           showSelect={showSelect}
           onClick={() => setShowSelect((prev) => !prev)}
         >
