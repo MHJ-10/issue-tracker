@@ -1,12 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-} from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 interface Props {
   pageSize: number;
@@ -22,45 +17,50 @@ const Pagination = ({ itemCount, currentPage, pageSize }: Props) => {
   if (pageCount <= 1) return null;
 
   const changePage = (page: number) => {
-    const params = new URLSearchParams(searchParams );
+    const params = new URLSearchParams(searchParams);
     params.set('page', page.toString());
     router.push('?' + params.toString());
   };
 
+  const renderPaginationButtons = () => {
+    const paginateButtons = [];
+
+    for (let i = 1; i <= pageCount; i++) {
+      paginateButtons.push(
+        <button
+          className={`pagination-btn ${i === currentPage && 'bg-indigo-600 text-white hover:bg-indigo-700'} `}
+          onClick={() => changePage(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return paginateButtons;
+  };
+
   return (
-    <div className='flex items-center justify-between bg-white px-4 py-3 sm:px-6'>
-      <div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
+    <div className='flex items-center justify-center bg-white px-4 py-3 sm:px-6'>
+      <div className='hidden gap-5 sm:flex sm:flex-1 sm:items-center sm:justify-start'>
         <div>{`page ${currentPage} of ${pageCount}`}</div>
         <div>
           <nav className='isolate inline-flex -space-x-px rounded-md shadow-sm'>
             <button
               className='pagination-btn rounded-l-md'
               disabled={currentPage === 1}
-              onClick={() => changePage(1)}
-            >
-              <FiChevronsLeft />
-            </button>
-            <button
-              className='pagination-btn'
-              disabled={currentPage === 1}
               onClick={() => changePage(currentPage - 1)}
             >
               <FiChevronLeft />
             </button>
 
+            {renderPaginationButtons()}
+
             <button
-              className='pagination-btn'
+              className='pagination-btn rounded-r-md'
               disabled={currentPage === pageCount}
               onClick={() => changePage(currentPage + 1)}
             >
               <FiChevronRight />
-            </button>
-            <button
-              className='pagination-btn rounded-r-md'
-              disabled={currentPage === pageCount}
-              onClick={() => changePage(pageCount)}
-            >
-              <FiChevronsRight />
             </button>
           </nav>
         </div>
@@ -70,12 +70,3 @@ const Pagination = ({ itemCount, currentPage, pageSize }: Props) => {
 };
 
 export default Pagination;
-
-{
-  /* <a
-              href='#'
-              className='relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
-            >
-              10
-            </a> */
-}
