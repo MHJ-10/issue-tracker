@@ -1,14 +1,15 @@
-import { IssueStatusBadge } from '@/app/components/index';
 import prisma from '@/prisma/client';
 import { Issue, Status } from '@prisma/client';
 import Link from 'next/link';
-import IssueStatusFilter from './_components/IssueStatusFilter';
 import { FaArrowUpLong } from 'react-icons/fa6';
+import { IssueStatusBadge, Pagination } from '../components';
+import IssueStatusFilter from './_components/IssueStatusFilter';
 
 interface Props {
   searchParams: {
     status: Status;
     orderBy: keyof Issue;
+    page: string;
   };
 }
 
@@ -30,11 +31,22 @@ const IssuesPage = async ({ searchParams }: Props) => {
       }
     : undefined;
 
+  const pageSize = 10;
+  const currentPage = +searchParams.page || 1;
+
   const issues = await prisma.issue.findMany({
     where: {
       status,
     },
     orderBy,
+    skip: (currentPage - 1) * pageSize,
+    take: pageSize,
+  });
+
+  const pageCount = await prisma.issue.count({
+    where: {
+      status,
+    },
   });
 
   return (
@@ -86,6 +98,12 @@ const IssuesPage = async ({ searchParams }: Props) => {
           ))}
         </tbody>
       </table>
+
+      <Pagination
+        itemCount={pageCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
