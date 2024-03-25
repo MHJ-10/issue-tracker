@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -17,11 +17,12 @@ interface Props {
 const Pagination = ({ itemCount, currentPage, pageSize }: Props) => {
   const pageCount = Math.ceil(itemCount / pageSize);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   if (pageCount <= 1) return null;
 
   const changePage = (page: number) => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams );
     params.set('page', page.toString());
     router.push('?' + params.toString());
   };
