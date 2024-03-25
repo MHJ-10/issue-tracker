@@ -12,6 +12,6 @@
   }
 
   .pagination-btn {
-    @apply relative inline-flex items-center  px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 transition-colors duration-300 hover:bg-slate-200 focus:z-20 focus:outline-offset-0;
+    @apply relative inline-flex items-center px-3 py-2  ring-1 ring-inset ring-slate-300 transition-colors duration-300 hover:bg-slate-200 focus:z-20 focus:outline-offset-0;
   }
 }
