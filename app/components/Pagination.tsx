@@ -41,11 +41,11 @@ const Pagination = ({ itemCount, currentPage, pageSize }: Props) => {
   };
 
   return (
-    <div className='flex items-center justify-center bg-white'>
-      <div className='hidden gap-5 sm:flex sm:flex-1 sm:items-center sm:justify-start'>
-        <div>{`page ${currentPage} of ${pageCount}`}</div>
+    <div className='flex items-center justify-center'>
+      <div className=' flex flex-1 items-center justify-center gap-5 sm:justify-start'>
+        <div className='hidden sm:flex'>{`page ${currentPage} of ${pageCount}`}</div>
         <div>
-          <nav className='isolate inline-flex -space-x-px rounded-md shadow-sm'>
+          <nav className='inline-flex rounded-md shadow-sm'>
             <button
               className='pagination-btn rounded-l-md'
               disabled={currentPage === 1}

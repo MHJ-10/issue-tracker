@@ -17,12 +17,11 @@ interface Props {
 
 const IssuesTable = ({ searchParams, issues }: Props) => {
   return (
-    <table className='w-full rounded-md border text-left'>
+    <table className='mx-auto w-full rounded-md border text-left'>
       <thead className='border-b font-medium dark:border-neutral-500'>
         <tr>
-          <th className='px-6 py-4'>#</th>
           {columns.map((column) => (
-            <th key={column.value} className='px-6 py-4'>
+            <th key={column.value} className={`px-3 py-4 ${column.className}`}>
               <Link
                 href={{
                   query: { ...searchParams, orderBy: column.value },
@@ -38,16 +37,15 @@ const IssuesTable = ({ searchParams, issues }: Props) => {
         </tr>
       </thead>
       <tbody>
-        {issues.map((issue, i) => (
+        {issues.map((issue) => (
           <tr key={issue.id} className='border-b dark:border-neutral-500'>
-            <td className='whitespace-nowrap px-6 py-4'>{i + 1}</td>
-            <td className='whitespace-nowrap px-6 py-4 text-blue-900 hover:underline'>
+            <td className='whitespace-nowrap text-wrap px-3 py-4 text-blue-900 hover:underline'>
               <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
             </td>
-            <td className='whitespace-nowrap px-6 py-4'>
+            <td className='hidden whitespace-nowrap px-3 py-4 sm:table-cell'>
               <IssueStatusBadge status={issue.status} />
             </td>
-            <td className='whitespace-nowrap px-6 py-4'>
+            <td className='hidden whitespace-nowrap px-3 py-4 md:table-cell'>
               {issue.createdAt.toDateString()}
             </td>
           </tr>
@@ -57,10 +55,14 @@ const IssuesTable = ({ searchParams, issues }: Props) => {
   );
 };
 
-const columns: { label: string; value: keyof Issue }[] = [
-  { label: 'Issue', value: 'title' },
-  { label: 'Status', value: 'status' },
-  { label: 'Created At', value: 'createdAt' },
+const columns: { label: string; value: keyof Issue; className: string }[] = [
+  { label: 'Issue', value: 'title', className: '' },
+  { label: 'Status', value: 'status', className: 'hidden sm:table-cell' },
+  {
+    label: 'Created At',
+    value: 'createdAt',
+    className: 'hidden md:table-cell',
+  },
 ];
 
 export const columnValues = columns.map((column) => column.value);

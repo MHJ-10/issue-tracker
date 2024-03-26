@@ -38,11 +38,11 @@ const IssueStatusFilter = () => {
   };
 
   return (
-    <div className='flex w-1/2 items-center justify-start gap-2'>
-      <label className='mt-1 block text-sm font-medium leading-6 text-gray-900'>
+    <div className='flex items-center justify-start gap-1'>
+      <label className='mt- block text-sm font-medium leading-6 text-gray-900'>
         Filter by status :
       </label>
-      <div className='w-1/4'>
+      <div className='w-1/2'>
         <Select
           placeholder={selectedStatus?.label ?? 'All'}
           showSelect={showSelect}
@@ -51,7 +51,7 @@ const IssueStatusFilter = () => {
           {statuses.map((status) => (
             <li
               key={status.label}
-              className='relative  select-none py-2 text-gray-900 transition duration-200 ease-in-out hover:bg-slate-200'
+              className='relative select-none py-2 text-gray-900 transition duration-200 ease-in-out hover:bg-slate-200'
               onClick={() => addQuery(status)}
             >
               <span className='ps-2'>{status.label}</span>

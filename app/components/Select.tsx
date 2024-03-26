@@ -10,7 +10,7 @@ interface Props {
 
 const Select = ({ placeholder, showSelect, onClick, children }: Props) => {
   return (
-    <div className='relative mt-2 flex flex-row gap-1'>
+    <div className='relative flex flex-row gap-1'>
       <div
         className='relative flex w-full items-center justify-between rounded-md bg-white px-2 py-1  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-300 sm:text-sm sm:leading-6'
         onClick={onClick}
