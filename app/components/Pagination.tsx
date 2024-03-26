@@ -28,6 +28,7 @@ const Pagination = ({ itemCount, currentPage, pageSize }: Props) => {
     for (let i = 1; i <= pageCount; i++) {
       paginateButtons.push(
         <button
+          key={i}
           className={`pagination-btn ${i === currentPage && 'bg-indigo-600 text-white hover:bg-indigo-700'} `}
           onClick={() => changePage(i)}
         >
@@ -40,7 +41,7 @@ const Pagination = ({ itemCount, currentPage, pageSize }: Props) => {
   };
 
   return (
-    <div className='flex items-center justify-center bg-white px-4 py-3 sm:px-6'>
+    <div className='flex items-center justify-center bg-white'>
       <div className='hidden gap-5 sm:flex sm:flex-1 sm:items-center sm:justify-start'>
         <div>{`page ${currentPage} of ${pageCount}`}</div>
         <div>

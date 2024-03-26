@@ -21,6 +21,9 @@ const IssueStatusFilter = () => {
   const [showSelect, setShowSelect] = useState<boolean>(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const selectedStatus = statuses.find(
+    (status) => status.status === searchParams.get('status')
+  );
 
   const addQuery = (status: IssueStatusFilter) => {
     const orderBy = searchParams.get('orderBy');
@@ -32,7 +35,6 @@ const IssueStatusFilter = () => {
     const query = params.size ? `?${params.toString()}` : '';
     router.push(`/issues/${query}`);
     setShowSelect(false);
-    console.log(params.toString());
   };
 
   return (
@@ -42,7 +44,7 @@ const IssueStatusFilter = () => {
       </label>
       <div className='w-1/4'>
         <Select
-          placeholder={searchParams.get('status') ?? 'All'}
+          placeholder={selectedStatus?.label ?? 'All'}
           showSelect={showSelect}
           onClick={() => setShowSelect((prev) => !prev)}
         >
