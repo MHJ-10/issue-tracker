@@ -5,6 +5,12 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    { pattern: /bg-(red|blue|green)-(200|300|400|500)/ },
+    { pattern: /text-(red|blue|green)-(400|500|600|700)/ },
+    { pattern: /ring-(red|blue|green)-(200|300|400|500)/ },
+    { pattern: /border-(red|blue|green)-(200|300|400|500)/ },
+  ],
   theme: {
     extend: {
       backgroundImage: {
@@ -15,4 +21,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};
