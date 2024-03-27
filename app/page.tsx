@@ -1,5 +1,11 @@
+import LatestIssues from './LatestIssues';
+
 const Home = () => {
-  return <div>Hello Wolrd</div>;
+  return (
+    <div>
+      <LatestIssues />
+    </div>
+  );
 };
 
 export default Home;
