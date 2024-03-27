@@ -16,7 +16,6 @@ const IssueChart = ({ open, inProgress, closed }: Props) => {
   ];
 
   return (
-    <div>
       <ResponsiveContainer width='100%' height={300}>
         <BarChart data={data}>
           <XAxis dataKey='label' />
@@ -24,7 +23,6 @@ const IssueChart = ({ open, inProgress, closed }: Props) => {
           <Bar dataKey='value' barSize={60} fill='#1e3a8a' />
         </BarChart>
       </ResponsiveContainer>
-    </div>
   );
 };
 
