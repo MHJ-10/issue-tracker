@@ -11,7 +11,7 @@ const LatestIssues = async () => {
   });
 
   return (
-    <div className='rounded-md border border-slate-300'>
+    <div className='rounded-md border border-slate-300 mx-1'>
       <p className='p-2 text-2xl font-bold'>Latest Issues</p>
       {issues.map((issue) => (
         <div

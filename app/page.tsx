@@ -22,12 +22,12 @@ const Home = async () => {
     },
   });
   return (
-    <div className='grid grid-cols-2 gap-4'>
+    <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+      <LatestIssues />
       <div className='flex flex-col items-center justify-center gap-6'>
         <IssueSummary open={open} inProgress={inProgress} closed={closed} />
         <IssueChart open={open} inProgress={inProgress} closed={closed} />
       </div>
-      <LatestIssues />
     </div>
   );
 };
