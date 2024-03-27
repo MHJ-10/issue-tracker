@@ -10,7 +10,7 @@ const statusMap: Record<Status, { label: string; color: string }> = {
 const IssueStatusBadge = ({ status }: { status: Status }) => {
   return (
     <span
-      className={`bg-${statusMap[status].color}-200  text-${statusMap[status].color}-500 inline-flex items-center rounded-md px-2 py-1 text-sm font-medium ring-1 ring-inset ring-${statusMap[status].color}-500/10`}
+      className={`bg-${statusMap[status].color}-200  text-${statusMap[status].color}-700 inline-flex items-center rounded-md px-2 py-1 text-sm font-medium ring-1 ring-inset ring-${statusMap[status].color}-500/10`}
     >
       {statusMap[status].label}
     </span>
