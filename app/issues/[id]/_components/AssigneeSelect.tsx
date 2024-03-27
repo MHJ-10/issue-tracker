@@ -5,6 +5,7 @@ import { httpService } from '@/services/httpService';
 import { Issue, User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -12,6 +13,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   const { data: users, isLoading, error } = useUsers();
   const [selectedUser, setSelectedUser] = useState<User | null>();
   const [showSelect, setShowSelect] = useState<boolean>(false);
+  const router = useRouter();
 
   const defaultUser = users?.find((user) => user.id === issue.assignedToUserId);
 
@@ -35,6 +37,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
           render() {
             setSelectedUser(user);
             setShowSelect(false);
+            router.refresh();
             return 'assigned issue';
           },
         },
