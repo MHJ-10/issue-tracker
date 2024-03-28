@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 interface Props {
@@ -15,6 +15,8 @@ const Pagination = ({ itemCount, currentPage, pageSize }: Props) => {
   const searchParams = useSearchParams();
 
   if (pageCount <= 1) return null;
+
+  if (+searchParams.get('page')! > pageCount) notFound();
 
   const changePage = (page: number) => {
     const params = new URLSearchParams(searchParams);
