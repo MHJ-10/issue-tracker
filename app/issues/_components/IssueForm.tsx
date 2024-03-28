@@ -84,7 +84,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         </div>
       </div>
 
-      <button className='btn-blue'>
+      <button className='rounded-md bg-blue-600 px-3 py-2 text-white ring-2 ring-blue-700 transition-colors duration-300 hover:bg-blue-700 hover:ring-blue-600'>
         {issue ? 'Update Issue' : 'Create Issue'}
       </button>
     </form>
