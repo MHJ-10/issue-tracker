@@ -2,6 +2,7 @@ import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
 import IssueForm from '../../_components/IssueForm';
 import { Metadata } from 'next';
+import { cache } from 'react';
 
 interface Props {
   params: {
@@ -9,12 +10,16 @@ interface Props {
   };
 }
 
-const EditIssuePage = async ({ params }: Props) => {
-  const issue = await prisma.issue.findUnique({
+const fetchIssue = cache((issueId: number) =>
+  prisma.issue.findUnique({
     where: {
-      id: +params.id,
+      id: issueId,
     },
-  });
+  })
+);
+
+const EditIssuePage = async ({ params }: Props) => {
+  const issue = await fetchIssue(+params.id);
 
   if (!issue) notFound();
 
@@ -22,11 +27,7 @@ const EditIssuePage = async ({ params }: Props) => {
 };
 
 export async function generateMetadata({ params }: Props) {
-  const issue = await prisma.issue.findUnique({
-    where: {
-      id: +params.id,
-    },
-  });
+  const issue = await fetchIssue(+params.id);
 
   return {
     title: `Issue Tracker - Edit Issue ${issue?.id}`,
@@ -35,4 +36,3 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default EditIssuePage;
-
