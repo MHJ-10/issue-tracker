@@ -1,12 +1,12 @@
-import authOptions from '@/app/api/auth/authOptions';
+import { authOptions } from '@/app/api/auth/authOptions';
 import prisma from '@/prisma/client';
 import { getServerSession } from 'next-auth';
 import { notFound } from 'next/navigation';
+import { cache } from 'react';
+import AssigneeSelect from './_components/AssigneeSelect';
 import DeleteIssueButton from './_components/DeleteIssueButton';
 import EditIssueButton from './_components/EditIssueButton';
 import IssueDetails from './_components/IssueDetails';
-import AssigneeSelect from './_components/AssigneeSelect';
-import { cache } from 'react';
 
 interface Props {
   params: {
