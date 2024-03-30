@@ -1,7 +1,13 @@
 import { Metadata } from 'next';
 import RegisterForm from './RegisterForm';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
-const RegisterPage = () => {
+const RegisterPage = async () => {
+  const session = await getServerSession();
+
+  if (session) redirect('/');
+
   return <RegisterForm />;
 };
 
