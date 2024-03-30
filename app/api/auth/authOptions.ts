@@ -2,6 +2,8 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { NextAuthOptions } from 'next-auth';
 import prisma from '@/prisma/client';
 import GoogleProvider from 'next-auth/providers/google';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { compare } from 'bcryptjs';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -10,8 +12,52 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+    CredentialsProvider({
+      name: 'Sign in',
+      id: 'credentials',
+      credentials: {
+        email: { label: '', type: 'text' },
+        password: { label: '', type: 'password' },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) return null;
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
+        });
+
+        const equalPassword = await compare(
+          credentials.password,
+          user?.password!
+        );
+
+        if (!user || !equalPassword) return null;
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+        };
+      },
+    }),
   ],
+  callbacks: {
+    session: ({ session, token }) => {
+      return { ...session, user: { ...session.user, id: token.id } };
+    },
+    jwt: ({ token, user }) => {
+      if (user) {
+        return { ...token, id: user.id };
+      }
+      return token;
+    },
+  },
   session: {
     strategy: 'jwt',
+  },
+  pages: {
+    signIn: '/login',
   },
 };
