@@ -1,8 +1,6 @@
 import prisma from '@/prisma/client';
 import Link from 'next/link';
-import { IssueStatusBadge } from './components';
-import Image from 'next/image';
-import UserAvatar from './components/UserAvatar';
+import { IssueStatusBadge, UserAvatar } from './components';
 
 const LatestIssues = async () => {
   const issues = await prisma.issue.findMany({

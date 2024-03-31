@@ -5,9 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { FaBug } from 'react-icons/fa6';
-import { Skeleton } from './components';
-import Dropdown from './components/Dropdown';
-import UserAvatar from './components/UserAvatar';
+import { Dropdown, Skeleton, UserAvatar } from './components';
 
 interface ILink {
   label: string;

@@ -1,11 +1,9 @@
 'use client';
 
-import { Select, Skeleton } from '@/app/components';
-import UserAvatar from '@/app/components/UserAvatar';
+import { Select, Skeleton, UserAvatar } from '@/app/components';
 import { httpService } from '@/services/httpService';
 import { Issue, User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
