@@ -1,13 +1,13 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { FaBug } from 'react-icons/fa6';
 import { Skeleton } from './components';
 import Dropdown from './components/Dropdown';
+import UserAvatar from './components/UserAvatar';
 
 interface ILink {
   label: string;
@@ -79,20 +79,7 @@ const AuthDropdown = () => {
     <Dropdown
       root={
         <button onClick={() => setShowDropdown((prev) => !prev)}>
-          {data?.user?.image ? (
-            <Image
-              className='inline-block h-8 w-8 rounded-full ring-2 ring-slate-200'
-              src={data!.user?.image!}
-              width={24}
-              height={24}
-              quality={75}
-              alt={data!.user?.name!}
-            />
-          ) : (
-            <div className='flex h-8 w-8 flex-col items-center justify-center rounded-full  bg-blue-500 text-white ring-2 ring-slate-200'>
-              {data?.user?.name?.split('')[0]}
-            </div>
-          )}
+          <UserAvatar name={data?.user?.name!} imageUrl={data?.user?.image!} />
         </button>
       }
       showDropdown={showDropdown}

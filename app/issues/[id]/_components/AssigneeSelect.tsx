@@ -1,6 +1,7 @@
 'use client';
 
 import { Select, Skeleton } from '@/app/components';
+import UserAvatar from '@/app/components/UserAvatar';
 import { httpService } from '@/services/httpService';
 import { Issue, User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
@@ -68,13 +69,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
               className='flex items-center justify-start gap-2 ps-2'
               onClick={() => assignIssue(user)}
             >
-              <Image
-                className='rounded-full'
-                src={user.image!}
-                alt={user.name!}
-                width={25}
-                height={25}
-              />
+              <UserAvatar name={user.name!} imageUrl={user.image!} />
               <span className='ml-3 block truncate font-normal'>
                 {user.name}
               </span>
