@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { registerSchema } from '../validationSchema';
 import { User } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 
 interface FormData extends User {
   confirmPassword: string;
@@ -20,14 +21,22 @@ const RegisterForm = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<FormData>({ resolver: zodResolver(registerSchema) });
+  const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
     const response = await toast.promise(httpService.post('/register', data), {
       pending: 'Registering User...',
       success: {
-        render({ data }) {
-          if (data.status === 201) {
-            setTimeout(() => signIn(undefined, { callbackUrl: '/' }), 2000);
+        async render({ data: result }) {
+          if (result.status === 201) {
+            await signIn('credentials', {
+              redirect: false,
+              email: data.email,
+              password: data.password,
+            });
+
+            setTimeout(() => router.push('/'), 2000);
+
             return 'User registration is done';
           }
         },
