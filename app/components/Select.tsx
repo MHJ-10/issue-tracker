@@ -21,7 +21,7 @@ const Select = ({ placeholder, showSelect, onClick, children }: Props) => {
         />
       </div>
       {showSelect && (
-        <ul className='absolute z-10 mt-8 max-h-56 w-full divide-y divide-slate-300 rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+        <ul className='absolute z-10 mt-8 max-h-56 overflow-auto w-full divide-y divide-slate-300 rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
           {children}
         </ul>
       )}
