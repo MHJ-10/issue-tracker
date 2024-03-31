@@ -47,9 +47,6 @@ export const authOptions: NextAuthOptions = {
     session: ({ session, token }) => {
       return { ...session, user: { ...session.user, id: token.id } };
     },
-    redirect: () => {
-      return '/';
-    },
     jwt: ({ token, user }) => {
       if (user) {
         return { ...token, id: user.id };

@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { loginSchema } from '../validationSchema';
 import { FcGoogle } from 'react-icons/fc';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
   const {
@@ -14,15 +16,25 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<User>({ resolver: zodResolver(loginSchema) });
+  const router = useRouter();
 
   const onSubmit = async (data: User) => {
     const response = await signIn('credentials', {
-      redirect: true,
+      redirect: false,
       email: data.email,
       password: data.password,
     });
 
-    console.log(response);
+    if (response?.ok) {
+      toast.success('logged in successfuly');
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+    } else {
+      if (response?.status === 401)
+        toast.error('username / password is incorrect');
+      else toast.error('server error, please try later');
+    }
   };
   return (
     <form
