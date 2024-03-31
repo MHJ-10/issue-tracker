@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { loginSchema } from '../validationSchema';
+import { FcGoogle } from 'react-icons/fc';
 
 const LoginForm = () => {
   const {
@@ -14,12 +15,11 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<User>({ resolver: zodResolver(loginSchema) });
 
-  const onSubmit = async (data: User ) => {
+  const onSubmit = async (data: User) => {
     const response = await signIn('credentials', {
-      redirect: false,
+      redirect: true,
       email: data.email,
       password: data.password,
-      callbackUrl: '/',
     });
 
     console.log(response);
@@ -54,20 +54,30 @@ const LoginForm = () => {
 
       <button
         type='submit'
-        className='mx-auto inline-block w-2/3 rounded bg-blue-600  py-3 text-center text-sm font-medium uppercase  text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg sm:w-1/3'
+        className='mx-auto inline-block w-2/3 rounded bg-blue-600  py-3 text-center text-sm font-medium uppercase text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg sm:w-1/2 lg:w-1/3'
       >
         Login
       </button>
 
-      <p className='mx-auto mt-2'>
-        Are you a new user?
-        <Link
-          className='ms-1 text-blue-500 underline underline-offset-2 transition-colors hover:text-blue-600'
-          href='/register'
+      <div className='bord my-3 flex flex-col items-center justify-center gap-3 border-t-2 border-slate-200 py-2'>
+        <button
+          type='button'
+          className='focus:bg-slate-20 mx-auto  flex w-2/3 items-center justify-center gap-2 rounded bg-white py-3 text-center text-sm font-medium  uppercase shadow-md transition duration-150 ease-in-out hover:bg-slate-200 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg sm:w-1/2 lg:w-1/3'
+          onClick={() => signIn('google', { redirect: true })}
         >
-          Create an account!
-        </Link>
-      </p>
+          Continue with Google <FcGoogle size={25} />
+        </button>
+
+        <p className=''>
+          Are you a new user?
+          <Link
+            className='ms-1 text-blue-500 underline underline-offset-2 transition-colors hover:text-blue-600'
+            href='/register'
+          >
+            Create an account!
+          </Link>
+        </p>
+      </div>
     </form>
   );
 };

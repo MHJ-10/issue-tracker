@@ -11,7 +11,7 @@ const LoginLoadingPage = () => {
       <Skeleton className='form-input my-2' height={55} count={2} />
 
       <div className='mx-auto inline-block w-2/3 rounded py-3 sm:w-1/3'>
-        <Skeleton height={40} />
+        <Skeleton height={40} count={2} className='my-1' />
       </div>
 
       <p className='mx-auto mt-2 w-2/3 sm:w-1/3'>
