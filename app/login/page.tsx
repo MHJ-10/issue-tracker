@@ -2,9 +2,10 @@ import { Metadata } from 'next';
 import LoginForm from './LoginForm';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { authOptions } from '@/services/authOptions';
 
 const LoginPage = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   if (session) redirect('/');
 
