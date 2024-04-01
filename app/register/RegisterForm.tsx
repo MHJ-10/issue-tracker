@@ -51,7 +51,7 @@ const RegisterForm = () => {
       className='mx-auto flex w-full flex-col justify-center rounded-md border border-slate-200 p-2 sm:w-3/4 md:w-2/3 '
       onSubmit={handleSubmit(onSubmit)}
     >
-      <p className='my-2 text-center text-2xl font-bold uppercase'>
+      <p className='my-2 text-center text-2xl font-bold lato'>
         Signup Form
       </p>
       <div className='mb-5'>
@@ -65,7 +65,7 @@ const RegisterForm = () => {
       </div>
       <div className='mb-5'>
         <input
-          placeholder='Email address'
+          placeholder='Email Address'
           className={`form-input ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
           type='text'
           {...register('email')}

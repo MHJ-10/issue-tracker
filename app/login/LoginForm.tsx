@@ -41,7 +41,7 @@ const LoginForm = () => {
       className='mx-auto flex w-full flex-col justify-center rounded-md border border-slate-200 p-2 sm:w-3/4 md:w-2/3 '
       onSubmit={handleSubmit(onSubmit)}
     >
-      <p className='my-2 text-center text-2xl font-bold uppercase'>
+      <p className='my-2 text-center text-2xl font-bold lato'>
         Login Form
       </p>
 

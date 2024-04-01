@@ -32,7 +32,7 @@ const NavLinks = () => {
   ];
 
   return (
-    <div className='flex items-center justify-start gap-7'>
+    <div className='flex items-center justify-start gap-7 lato'>
       <Link href='/'>
         <FaBug size={26} />
       </Link>

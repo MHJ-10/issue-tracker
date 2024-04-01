@@ -4,7 +4,7 @@ import { Issue } from '@prisma/client';
 const IssueDetails = ({ issue }: { issue: Issue }) => {
   return (
     <div className='flex flex-col items-start gap-3'>
-      <p className='text-3xl'>{issue?.title}</p>
+      <p className='text-3xl lato'>{issue?.title}</p>
       <div className='flex gap-5'>
         <IssueStatusBadge status={issue.status} />
         <p>{issue?.createdAt.toLocaleString("en-GB")}</p>

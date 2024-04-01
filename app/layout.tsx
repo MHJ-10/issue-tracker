@@ -1,13 +1,22 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Lato, Open_Sans } from 'next/font/google';
 import { Slide, ToastContainer } from 'react-toastify';
 import 'react-toastify/ReactToastify.css';
-import Navbar from './Navbar';
-import './globals.css';
 import AuthProvider from './auth/AuthProvider';
+import './globals.css';
+import Navbar from './Navbar';
 import QueryClientProvider from './QueryClientProvider';
 
-const inter = Inter({ subsets: ['latin'] });
+export const openSans = Open_Sans({
+  subsets: ['latin'],
+  variable: '--font-opensans',
+});
+
+export const lato = Lato({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-lato',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} m-0 p-0`}>
+      <body className={`${openSans.variable} ${lato.variable} m-0 p-0`}>
         <QueryClientProvider>
           <AuthProvider>
             <ToastContainer
@@ -33,7 +42,7 @@ export default function RootLayout({
               limit={2}
             />
             <Navbar />
-            <main className='container mx-auto  py-5'>{children}</main>
+            <main className='container mx-auto py-5'>{children}</main>
           </AuthProvider>
         </QueryClientProvider>
       </body>

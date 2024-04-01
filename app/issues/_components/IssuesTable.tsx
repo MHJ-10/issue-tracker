@@ -18,7 +18,7 @@ interface Props {
 const IssuesTable = ({ searchParams, issues }: Props) => {
   return (
     <table className='mx-auto w-full rounded-md border text-left'>
-      <thead className='border-b font-medium dark:border-neutral-500'>
+      <thead className='border-b font-medium dark:border-neutral-500 lato'>
         <tr>
           {columns.map((column) => (
             <th key={column.value} className={`px-3 py-4 ${column.className}`}>

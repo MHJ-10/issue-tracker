@@ -26,14 +26,14 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
   ];
 
   return (
-    <div className='flex w-full flex-col items-center justify-start gap-5 sm:flex-row'>
+    <div className='flex w-full  flex-col items-center justify-start gap-5 sm:flex-row'>
       {statuses.map((status) => (
         <div
           key={status.label}
           className={`flex h-40 w-3/4 flex-col items-center justify-center gap-2 rounded-md border-2 sm:w-1/3 border-${status.color}-300 bg-${status.color}-200 `}
         >
           <Link
-            className='text-center text-lg font-bold'
+            className='lato text-center text-lg font-bold'
             href={`/issues?status=${status.status}`}
           >
             {status.label} Issues

@@ -55,7 +55,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         height={90}
         className='size-32 rounded-full border border-slate-400 bg-slate-200 p-1 shadow-md shadow-gray-400 transition-transform duration-500 hover:translate-y-2 hover:scale-110'
       />
-      <p className='text-2xl font-bold uppercase'>Issue Form</p>
+      <p className='lato text-2xl font-bold normal-case'>Issue Form</p>
       <div className='flex w-full justify-between px-2 sm:w-3/4'>
         <label htmlFor='title'>Title:</label>
         <div className='flex w-3/4 flex-col gap-2'>

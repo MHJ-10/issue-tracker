@@ -1,8 +1,7 @@
 import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
-import IssueForm from '../../_components/IssueForm';
-import { Metadata } from 'next';
 import { cache } from 'react';
+import IssueForm from '../../_components/IssueForm';
 
 interface Props {
   params: {
