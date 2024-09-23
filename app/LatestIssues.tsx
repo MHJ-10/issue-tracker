@@ -11,7 +11,7 @@ const LatestIssues = async () => {
 
   return (
     <div className='mx-1 rounded-md border border-slate-300'>
-      <p className='p-2 text-2xl lato'>Latest Issues</p>
+      <p className='lato p-2 text-2xl'>Latest Issues</p>
       {issues.map((issue) => (
         <div
           className='my-2 flex items-center justify-between border-b border-slate-200 px-2 py-1'
@@ -32,5 +32,7 @@ const LatestIssues = async () => {
     </div>
   );
 };
+
+export const dynamic = 'force-dynamic';
 
 export default LatestIssues;
