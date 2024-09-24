@@ -52,6 +52,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         Assigned To
       </label>
       <Select
+        onClose={() => setShowSelect(false)}
         placeholder={
           selectedUser?.name ?? (defaultUser?.name || 'Select a user')
         }

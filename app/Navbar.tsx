@@ -32,7 +32,7 @@ const NavLinks = () => {
   ];
 
   return (
-    <div className='flex items-center justify-start gap-7 lato'>
+    <div className='lato flex items-center justify-start gap-7'>
       <Link href='/'>
         <FaBug size={26} />
       </Link>
@@ -75,6 +75,7 @@ const AuthDropdown = () => {
 
   return (
     <Dropdown
+      onClose={() => setShowDropdown(false)}
       root={
         <button onClick={() => setShowDropdown((prev) => !prev)}>
           <UserAvatar name={data?.user?.name!} imageUrl={data?.user?.image!} />

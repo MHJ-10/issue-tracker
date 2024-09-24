@@ -1,6 +1,7 @@
 'use client';
 
 import { Select } from '@/app/components';
+import { useCloseElement } from '@/app/hooks/useCloseElement';
 import { Status } from '@prisma/client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
@@ -47,6 +48,7 @@ const IssueStatusFilter = () => {
           placeholder={selectedStatus?.label ?? 'All'}
           showSelect={showSelect}
           onClick={() => setShowSelect((prev) => !prev)}
+          onClose={() => setShowSelect(false)}
         >
           {statuses.map((status) => (
             <li
