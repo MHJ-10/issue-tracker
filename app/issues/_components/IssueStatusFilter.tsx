@@ -30,6 +30,7 @@ const IssueStatusFilter = () => {
     const orderBy = searchParams.get('orderBy');
     const params = new URLSearchParams();
 
+    params.append('page', '1');
     if (status.status) params.append('status', status.status!);
     if (orderBy) params.append('orderBy', orderBy);
 

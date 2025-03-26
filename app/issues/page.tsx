@@ -16,9 +16,9 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const status = Object.values(Status).includes(searchParams.status)
     ? searchParams.status
     : undefined;
-  const orderBy = columnValues.includes(searchParams.orderBy)
+  const sortBy = columnValues.includes(searchParams.sortBy)
     ? {
-        [searchParams.orderBy]: 'asc',
+        [searchParams.sortBy]: searchParams.orderBy,
       }
     : undefined;
 
@@ -29,7 +29,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
     where: {
       status,
     },
-    orderBy,
+    orderBy: sortBy,
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
   });

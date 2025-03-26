@@ -10,6 +10,7 @@ import { Dropdown, Skeleton, UserAvatar } from './components';
 interface ILink {
   label: string;
   href: string;
+  query?: Record<string, string>;
 }
 
 const Navbar = () => {
@@ -28,7 +29,7 @@ const NavLinks = () => {
 
   const links: ILink[] = [
     { label: 'Dashboard', href: '/' },
-    { label: 'Issues', href: '/issues' },
+    { label: 'Issues', href: '/issues', query: { page: '1' } },
   ];
 
   return (
@@ -41,7 +42,7 @@ const NavLinks = () => {
           <li key={link.href}>
             <Link
               className={`${link.href === pathname && 'text-zinc-950 underline underline-offset-2'} text-zinc-600`}
-              href={link.href}
+              href={{ pathname: link.href, query: link.query }}
             >
               {link.label}
             </Link>
